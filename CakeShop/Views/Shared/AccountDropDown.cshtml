@@ -9,14 +9,17 @@
     }
     else
     {
-        <a asp-action="myOrder" asp-controller="order" class="dropdown-item">My Order</a>
+        if (!User.IsInRole("Admin"))
+        {
+            <a asp-action="myOrder" asp-controller="order" class="dropdown-item">My Order</a>
+        }
+        <a asp-action="myProfile" asp-controller="account" class="dropdown-item">My Profile</a>
         <form method="post" asp-action="logout" asp-controller="account" class="no-padding-margin dropdown-item">
             <button class="btn dropdown-item btn-no-effect">logout</button>
         </form>
 
         if (User.IsInRole("Admin"))
         {
-
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" asp-action="AllOrders" asp-controller="admin">Manage Orders</a>
             <a class="dropdown-item" asp-action="ManageCakes" asp-controller="admin">Manage Cakes</a>

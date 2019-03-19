@@ -1,7 +1,10 @@
-﻿using CakeShop.Core.ViewModel;
+﻿using CakeShop.Core;
+using CakeShop.Core.Models;
+using CakeShop.Core.ViewModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace CakeShop.Controllers
@@ -115,6 +118,31 @@ namespace CakeShop.Controllers
         {
             await Logout();
             return RedirectToAction("Login");
+        }
+
+        [Authorize]
+        public async Task<IActionResult> MyProfile()
+        {
+            var user = await _userManager.GetUserAsync(User);
+
+            return View(new MyProfileViewModel {
+                UserName = user.UserName,
+                Email = user.Email,
+                PhoneNumber = user.PhoneNumber,
+                Id = user.Id
+            });
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> MyProfile([FromForm] MyProfileViewModel myProfileViewModel)
+        {
+            var user = await _userManager.FindByIdAsync(myProfileViewModel.Id);
+            user.Email = myProfileViewModel.Email;
+            user.UserName = myProfileViewModel.UserName;
+            user.PhoneNumber = myProfileViewModel.PhoneNumber;
+            await _userManager.UpdateAsync(user);
+            return View(myProfileViewModel);
         }
     }
 }

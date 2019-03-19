@@ -1,7 +1,7 @@
 ﻿:root {
     --color1: #D95100;
-    --color2: #F53935;
-    --color3: #e29364;
+    --color2: #800080; /*Purple*/
+    --color3: #00FFFF;
 }
 
 body {

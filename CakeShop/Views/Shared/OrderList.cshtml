@@ -13,7 +13,7 @@
         <tr>
             <th>Billing Address</th>
             <th>Order Summary</th>
-            <th>Total Ammount</th>
+            <th>Total Amount</th>
         </tr>
     </thead>
     <tbody>
@@ -58,7 +58,7 @@
                                     </td>
                                     <td>
                                         @item.Price.ToString("c") * @item.Qty
-
+										@String.Format(new System.Globalization.CultureInfo("hi-IN"), "{0:c}", decimal.Parse("12345678", System.Globalization.CultureInfo.InvariantCulture))
                                     </td>
                                 </tr>
 

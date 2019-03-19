@@ -2,7 +2,6 @@
   "version": "1.0.0",
   "name": "cake-shop",
   "private": true,
-  "author": "Ritwick Dey",
   "scripts": {
     "start": "webpack --config webpack.config.js --watch --progress --profile",
     "build": "webpack --config webpack.config.js --progress --profile",
